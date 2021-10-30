@@ -24,8 +24,14 @@ code {
 ::-webkit-scrollbar {
   height: 4px;
   width: 4px;
-  background: #f5f5f5;
+  @apply bg-gray-900 
 }
 ::-webkit-scrollbar-thumb{
-  background-color: black;
+  @apply rounded-3xl bg-white bg-opacity-80
 }
+
+li {
+  -webkit-column-break-inside: avoid;
+            page-break-inside: avoid;
+                 break-inside: avoid;
+  }

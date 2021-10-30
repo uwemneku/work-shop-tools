@@ -3,7 +3,7 @@ import tw from 'tailwind-styled-components/dist/tailwind'
 import {GoSearch} from 'react-icons/go'
 import {IoClose} from 'react-icons/io5'
 import {IoMdAdd} from 'react-icons/io'
-import AddPerson from '../Modals/AddPerson/AddPerson'
+import AddPerson from '../Modals/AddPerson'
 const Container = tw.div`
         flex
         justify-between
@@ -31,11 +31,6 @@ const Input = tw.input`
     text-sm
     text-white
 `
-const IconButton = tw.div`
-    hover:bg-blue-800
-    p-2
-    rounded-md
-`
 
 function TopMenu() {
     return (
@@ -43,9 +38,6 @@ function TopMenu() {
             <InputComponent />
             <div>
                 <AddPerson />
-                <IconButton>
-                    <IoMdAdd size={25} className='text-white' />
-                </IconButton>
             </div>
         </Container>
     )
@@ -73,33 +65,3 @@ const InputComponent = () => {
 
 export default TopMenu
 
-// function TopMenu() {
-//     const [showSearch, setShowSearch] = useState(false)
-//     const toggleSearchDisplay = () => setShowSearch(!showSearch)
-
-//     return (
-//         <Box sx={{ paddingX: 2, display: 'flex', justifyContent: 'flex-end' }} >
-//                  <Input
-//                     id="input-with-icon-adornment"
-//                     startAdornment={
-//                         <InputAdornment position="start">
-//                         <AccountCircle />
-//                         </InputAdornment>
-//                     }
-//                     />
-//                 <AppPersonDialog />
-//             {/* <Tooltip title="Search">
-//                 <IconButton onClick={toggleSearchDisplay} >
-//                     {
-//                         showSearch ?
-//                             <IoCloseCircle size={30} color='red' />
-//                             :
-//                             <GoSearch size={30} />
-//                     }
-//                 </IconButton>
-//             </Tooltip> */}
-//         </Box>
-//     )
-// }
-
-// export default TopMenu
