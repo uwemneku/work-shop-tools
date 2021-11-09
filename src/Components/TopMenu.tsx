@@ -4,6 +4,41 @@ import {GoSearch} from 'react-icons/go'
 import {IoClose} from 'react-icons/io5'
 import {IoMdAdd} from 'react-icons/io'
 import AddPerson from '../Modals/AddPerson'
+
+
+function TopMenu() {
+    return (
+        <Container>
+            <InputComponent />
+            <div>
+                <AddPerson />
+            </div>
+        </Container>
+    )
+}
+
+const InputComponent = () => {
+    const [inputValue, setInputValue] = useState<string>('')
+    const inputRef = useRef<HTMLInputElement>()
+
+    const handleTextChange:React.ChangeEventHandler<HTMLInputElement> | undefined = ({target}) => {
+            setInputValue(target.value)
+            console.log(target.value);
+    }
+
+    const handleIconClick = () => setInputValue('')
+    return(
+            <InputContainer>
+                <GoSearch size={15} color='white' />
+                <Input ref={inputRef} value={inputValue} onChange={handleTextChange} className={`${inputValue.length > 0 ? 'w-60' : 'w-52'}`} />
+                {(inputValue.length > 0) && <IoClose size={20} className='text-white hover:bg-white hover:text-black' onClick={handleIconClick} />}
+            </InputContainer>
+
+    )
+}
+
+export default TopMenu
+
 const Container = tw.div`
         flex
         justify-between
@@ -30,38 +65,6 @@ const Input = tw.input`
     px-3
     text-sm
     text-white
+    transition-all
+    duration-300
 `
-
-function TopMenu() {
-    return (
-        <Container>
-            <InputComponent />
-            <div>
-                <AddPerson />
-            </div>
-        </Container>
-    )
-}
-
-const InputComponent = () => {
-    const [inputValue, setInputValue] = useState<string>('')
-    const inputRef = useRef<HTMLInputElement>()
-
-    const handleTextChange:React.ChangeEventHandler<HTMLInputElement> | undefined = ({target}) => {
-            setInputValue(target.value)
-            console.log(target.value);
-    }
-
-    const handleIconClick = () => setInputValue('')
-    return(
-            <InputContainer>
-                <GoSearch size={15} color='white' />
-                <Input ref={inputRef} value={inputValue} onChange={handleTextChange} />
-                {(inputValue.length > 0) && <IoClose size={20} className='text-white hover:bg-white hover:text-black' onClick={handleIconClick} />}
-            </InputContainer>
-
-    )
-}
-
-export default TopMenu
-

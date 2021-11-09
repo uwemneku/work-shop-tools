@@ -33,13 +33,16 @@ function FormModal({onClose}:PropsWithChildren<Props>): JSX.Element | null {
       onClose();
     },
   })
-  const toolsArrayLength = useRef<number>(formik.values.tools.length)
+  const toolsArrayLength = useRef<number>(formik.values.tools.length)   //keeps track of the previous number of tools input when there is a render
 
+  //reset form when this component mounts
   useEffect(() => {
     formik.resetForm()
   }, [])
 
   useEffect(() => {
+    // The statement (toolsArrayLength.current < formik.values.tools.length) ensures that 
+    // scrollTo is only called when the tools array in formik increases and not when it reduces
     if (scrollRef.current && (toolsArrayLength.current < formik.values.tools.length)) {
       const { scrollHeight } = scrollRef.current
       scrollRef.current.scrollTo({ behavior: 'smooth', top: scrollHeight })
@@ -51,9 +54,10 @@ function FormModal({onClose}:PropsWithChildren<Props>): JSX.Element | null {
   const increaseToolsInput = () => {
     const tools = formik.values.tools
     tools.push({ name: '', number: '', id: uuidv4() })
-    formik.setValues({ ...formik.values, tools: [...tools] })
+    formik.setValues({ ...formik.values, tools})
   }
 
+  //Removes a tool from the tools array in formik 
   const removeToolsInput = (id: string) => {
     const { tools: oldTools } = formik.values
     const tools = oldTools.filter((item, index) => item.id !== id)
@@ -99,7 +103,7 @@ function FormModal({onClose}:PropsWithChildren<Props>): JSX.Element | null {
                               index={index}
                               key={item.id}
                               id={item.id}
-                              showIcon={formik.values.tools.length > 1}
+                              showIcon={formik.values.tools.length > 1}   // only show the remove icon when the tool input is more than one
                               onChange={formik.handleChange}
                               onBlur={formik.handleBlur}
                               toolName={formik.values.tools[index].name}

@@ -1,20 +1,26 @@
 import React from 'react'
+import BorrowerCard from '../Components/BorrowerCard';
 import TopMenu from '../Components/TopMenu'
+import { useAppSelector } from '../hooks/reduxHook';
+import Masonry from 'react-masonry-css'
 
 function Tools() {
+    const appData = useAppSelector(state => state.borrowerInfo)
     return (
-        <div className='max-h-screen overflow-hidden flex flex-col' >
+        <div className='max-h-screen h-screen overflow-hidden flex flex-col' >
             <TopMenu />
-            <div className='overflow-y-auto m-2' style={{columns: 5, columnGap:3}}>
+            <Masonry
+                breakpointCols={4}
+                className="my-masonry-grid bg-black flex-1 overflow-y-scroll"
+                columnClassName="my-masonry-grid_column">
                 {
-                    new Array(100).fill(1).map((item, i) => {
-                        return(
-                            <li className={`bg-black h-24 mb-2 hover:h-32 transition-all duration-500 hover:bg-blue-500` }>
-                            </li>
+                    new Array(90).fill(1).map((item, i) => {
+                        return (
+                            <BorrowerCard {...item} key={i} />
                         )
                     })
                 }
-            </div>
+        </Masonry >
         </div>
     )
 }

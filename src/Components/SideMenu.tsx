@@ -18,7 +18,7 @@ function SideMenu() {
             <ul>
                 <Link active={false}>
                     <MdOutlineEngineering size={25} />
-                    <Text>Breakdown Report</Text>
+                    <Text>Breakdown</Text>
                 </Link>
             </ul>
             <ul>
@@ -37,7 +37,11 @@ export default SideMenu
 const Container = tw.div`
     h-screen
     max-h-screen
-    w-52
+    transition-all
+    duration-300
+    w-20
+    group
+    hover:w-52
     bg-gray-700
     py-16
     cursor-default
@@ -51,10 +55,16 @@ const Link = tw.li<{active: boolean}>`
     border-l-4
     text-base
     font-normal
+    transform-none
     mb-2
+    justify-center
+    group-hover:justify-start
     
     
 `
 const Text = tw.p`
     ml-3
+    transition-none
+    hidden
+    group-hover:block
 `
